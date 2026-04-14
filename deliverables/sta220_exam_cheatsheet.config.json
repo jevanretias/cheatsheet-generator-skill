@@ -1,0 +1,27 @@
+{
+  "layout": {
+    "paper_size": "letterpaper",
+    "margin_mm": 4,
+    "font_family": "Arial",
+    "font_size_pt": 6,
+    "columns": 5
+  },
+  "colors": {
+    "scheme": "Classic"
+  },
+  "content": {
+    "detail_level": "moderate",
+    "include_proofs": false,
+    "include_examples": true,
+    "include_derivations": true,
+    "exam_focus": [
+      "probability rules",
+      "random variables",
+      "sampling distributions",
+      "confidence intervals",
+      "hypothesis testing",
+      "comparing two groups",
+      "simple linear regression"
+    ]
+  }
+}

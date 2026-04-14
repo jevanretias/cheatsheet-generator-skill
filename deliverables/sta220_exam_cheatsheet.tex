@@ -1,0 +1,143 @@
+\documentclass[10pt,landscape,letterpaper]{article}
+\usepackage[landscape,left=4mm,right=4mm,top=4mm,bottom=4mm]{geometry}
+\usepackage{multicol}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fontspec}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\setmainfont{Arial}
+\setsansfont{Arial}
+\definecolor{sectionblue}{RGB}{0,51,102}
+\definecolor{conceptcyan}{RGB}{0,139,139}
+\definecolor{processpurple}{RGB}{128,0,128}
+\definecolor{categorygreen}{RGB}{0,128,0}
+\definecolor{highlightyellow}{RGB}{255,255,150}
+\renewcommand{\normalsize}{\fontsize{6pt}{6pt}\selectfont}
+\normalsize
+\titleformat{\section}{\color{sectionblue}\bfseries\fontsize{6pt}{6pt}\selectfont}{}{0em}{}
+\titleformat{\subsection}{\color{conceptcyan}\bfseries\fontsize{5.5pt}{5.5pt}\selectfont}{}{0em}{}
+\titlespacing*{\section}{0pt}{1pt}{0.5pt}
+\titlespacing*{\subsection}{0pt}{0.5pt}{0.25pt}
+\setlist[itemize]{leftmargin=*,nosep,topsep=0pt,parsep=0pt,partopsep=0pt,itemsep=0pt}
+\setlist[enumerate]{leftmargin=*,nosep,topsep=0pt,parsep=0pt,partopsep=0pt,itemsep=0pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.3pt}
+\setlength{\columnsep}{3mm}
+\tolerance=9999\emergencystretch=3em\hyphenpenalty=50\exhyphenpenalty=50\sloppy\raggedright
+\pagestyle{empty}
+\newcommand{\concept}[1]{\textcolor{conceptcyan}{\textbf{#1}}}
+\newcommand{\process}[1]{\textcolor{processpurple}{\textbf{#1}}}
+\newcommand{\category}[1]{\textcolor{categorygreen}{\textbf{#1}}}
+\newcommand{\important}[1]{{\setlength{\fboxsep}{1pt}\colorbox{highlightyellow}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{#1}}}}
+\begin{document}
+\begin{multicols}{5}
+\section{PROBABILITY CORE RULES}
+\concept{Axioms:} $0\le P(A)\le1$, $P(S)=1$, disjoint $A_i\Rightarrow P(\cup A_i)=\sum P(A_i)$.\\
+\concept{Comp:} $P(A^c)=1-P(A)$. \concept{Union:} $P(A\cup B)=P(A)+P(B)-P(A\cap B)$.\\
+\concept{Cond prob:} $P(A\mid B)=\frac{P(A\cap B)}{P(B)}$, $P(B)>0$.\\
+\concept{Mult rule:} $P(A\cap B)=P(A\mid B)P(B)=P(B\mid A)P(A)$.\\
+\concept{Indep:} $A\perp B\iff P(A\cap B)=P(A)P(B)\iff P(A\mid B)=P(A)$.\\
+\important{$P(A)=\sum_i P(A\mid B_i)P(B_i)$ for partition $\{B_i\}$ (total prob).}\\
+\important{$P(B_j\mid A)=\dfrac{P(A\mid B_j)P(B_j)}{\sum_i P(A\mid B_i)P(B_i)}$ (Bayes).}\\
+\category{Counting:} $n!$, ${n\choose k}=\frac{n!}{k!(n-k)!}$, perms $P(n,k)=\frac{n!}{(n-k)!}$.\\
+\process{Strategy:} define sample space\,$\to$\,events\,$\to$\,use counting\,$\to$\,convert to prob.\\
+\concept{Law of large numbers:} $\bar X_n\to\mu$ (in prob) as $n\to\infty$.\\
+\concept{Randomization intuition:} long-run freq approximates model prob.\\
+\section{RANDOM VARIABLES}
+\concept{RV:} function $X:S\to\mathbb R$. \category{Discrete} via pmf $p(x)$; \category{Continuous} via pdf $f(x)$.\\
+\concept{CDF:} $F(x)=P(X\le x)$, nondecreasing, right-continuous, limits $0,1$.\\
+\concept{Discrete:} $P(X=x)=p(x)$, $\sum_x p(x)=1$.\\
+\concept{Continuous:} $P(a\le X\le b)=\int_a^b f(x)dx$, $\int f=1$, $P(X=x)=0$.\\
+\important{$E[X]=\sum x p(x)$ or $\int x f(x)dx$; $\operatorname{Var}(X)=E[(X-\mu)^2]=E[X^2]-\mu^2$.}\\
+\concept{Linear rules:} $E[aX+b]=aE[X]+b$, $\operatorname{Var}(aX+b)=a^2\operatorname{Var}(X)$.\\
+\concept{For indep $X,Y$:} $E[X\pm Y]=E[X]\pm E[Y]$, $\operatorname{Var}(X\pm Y)=\operatorname{Var}(X)+\operatorname{Var}(Y)$.\\
+\category{Bernoulli($p$):} $P(X=1)=p$, $E[X]=p$, $\operatorname{Var}(X)=p(1-p)$.\\
+\category{Binomial($n,p$):} $P(X=k)={n\choose k}p^k(1-p)^{n-k}$, $E=np$, $\operatorname{Var}=np(1-p)$.\\
+\category{Geometric($p$):} $P(X=k)=(1-p)^{k-1}p$, $E=1/p$, memoryless.\\
+\category{Poisson($\lambda$):} $P(X=k)=e^{-\lambda}\lambda^k/k!$, $E=\lambda$, Var$=\lambda$.\\
+\category{Normal($\mu,\sigma^2$):} standardize $Z=\frac{X-\mu}{\sigma}$.\\
+\important{Empirical rule (normal): $\mu\pm1\sigma\approx68\%$, $\pm2\sigma\approx95\%$, $\pm3\sigma\approx99.7\%$.}\\
+\section{SAMPLING DISTRIBUTIONS}
+\concept{Sample mean:} $\bar X=\frac1n\sum X_i$, $E[\bar X]=\mu$, $SE(\bar X)=\sigma/\sqrt n$.\\
+\concept{Sample proportion:} $\hat p=X/n$, $E[\hat p]=p$, $SE(\hat p)=\sqrt{p(1-p)/n}$.\\
+\important{CLT: if i.i.d. + finite var, $\frac{\bar X-\mu}{\sigma/\sqrt n}\approx N(0,1)$ for large $n$.}\\
+\concept{Finite pop correction:} if sampling w/o repl and frac large, multiply SE by $\sqrt{\frac{N-n}{N-1}}$.\\
+\process{Normal approx for $\hat p$:} need $n\hat p\ge10$, $n(1-\hat p)\ge10$ (or use null $p_0$ in tests).\\
+\section{ESTIMATION \& CI}
+\concept{Point est:} single best guess. \concept{CI:} range of plausible param values.\\
+\important{Generic CI: estimate $\pm$ critical$\times SE$.}\\
+\category{1-mean ($\sigma$ known):} $\bar x\pm z^*\frac{\sigma}{\sqrt n}$.\\
+\category{1-mean ($\sigma$ unk):} $\bar x\pm t^*_{df=n-1}\frac{s}{\sqrt n}$.\\
+\category{1-proportion:} $\hat p\pm z^*\sqrt{\frac{\hat p(1-\hat p)}{n}}$.\\
+\category{2-means indep:} $(\bar x_1-\bar x_2)\pm t^*\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}$.\\
+\category{Paired mean diff:} $\bar d\pm t^*\frac{s_d}{\sqrt n}$.\\
+\category{2-proportions:} $(\hat p_1-\hat p_2)\pm z^*\sqrt{\frac{\hat p_1(1-\hat p_1)}{n_1}+\frac{\hat p_2(1-\hat p_2)}{n_2}}$.\\
+\concept{Interp CI:} in repeated sampling, $C\%$ CIs capture true param $C\%$ of time. Not $P(\theta\in CI)=C\%$ after seeing data.\\
+\concept{Margin of error:} $ME=critical\times SE$, increases w/ confidence, decreases w/ $n$.\\
+\important{Sample size for prop ME $m$: $n\approx z^{*2}p^*(1-p^*)/m^2$; if no $p^*$ use 0.5.}\\
+\section{HYPOTHESIS TESTING WORKFLOW}
+\process{Steps:} 1) parameter + assumptions 2) $H_0,H_A$ 3) test stat 4) p-val 5) decision 6) context conclusion.\\
+\concept{$H_0$:} status quo / no effect. \concept{$H_A$:} research claim (one- or two-sided).\\
+\important{p-value = under $H_0$, prob of test stat as/extreme than observed.}\\
+\concept{Type I: reject true $H_0$ (prob $\alpha$). Type II: fail reject false $H_0$ (prob $\beta$). Power $=1-\beta$.}\\
+\concept{Lower $\alpha$} reduces Type I risk but can increase Type II unless $n$ rises.\\
+\category{1-mean t test:} $t=\frac{\bar x-\mu_0}{s/\sqrt n}$, df $n-1$.\\
+\category{1-prop z test:} $z=\frac{\hat p-p_0}{\sqrt{p_0(1-p_0)/n}}$.\\
+\category{2-mean (Welch):} $t=\frac{(\bar x_1-\bar x_2)-\Delta_0}{\sqrt{s_1^2/n_1+s_2^2/n_2}}$.\\
+\category{2-prop pooled z:} $\hat p=\frac{x_1+x_2}{n_1+n_2}$, $z=\frac{(\hat p_1-\hat p_2)-0}{\sqrt{\hat p(1-\hat p)(1/n_1+1/n_2)}}$.\\
+\concept{CI vs test link:} two-sided level $\alpha$ test rejects iff null value not in $(1-\alpha)$ CI.\\
+\section{EFFECTIVE TEST CHOICE}
+\process{One sample mean?} numeric resp + 1 group $\Rightarrow$ 1-sample t.\\
+\process{One sample proportion?} binary resp + 1 group $\Rightarrow$ 1-prop z.\\
+\process{Two indep means?} numeric resp + two groups $\Rightarrow$ 2-sample t (Welch).\\
+\process{Paired means?} before/after or matched pairs $\Rightarrow$ paired t on diffs.\\
+\process{Two indep proportions?} binary resp + two groups $\Rightarrow$ 2-prop z.\\
+\process{Association cat-cat?} counts in table $\Rightarrow$ $\chi^2$ test of independence/homogeneity.\\
+\concept{Assumption checks:} random/indep, approx normality or large n, no extreme outliers for small n.\\
+\important{Statistical sig $\neq$ practical sig; report effect size + CI.}\\
+\section{COMPARING TWO GROUPS}
+\concept{Difference in means:} parameter $\mu_1-\mu_2$; estimate $\bar x_1-\bar x_2$.\\
+\concept{Difference in props:} parameter $p_1-p_2$; estimate $\hat p_1-\hat p_2$.\\
+\category{Paired design advantage:} controls person-level variability, boosts power.\\
+\concept{Equal variance not required} in intro workflows (Welch robust default).\\
+\process{Interpretation template:} ``Data provide [strong/moderate/weak] evidence that [group1] has [higher/lower] mean/proportion than [group2] by about [estimate], 95\% CI [L,U].''\\
+\section{CHI-SQUARE BASICS}
+\concept{Expected count:} $E_{ij}=\frac{(row_i\ total)(col_j\ total)}{n}$.\\
+\important{$\chi^2=\sum\frac{(O-E)^2}{E}$, df$=(r-1)(c-1)$.}\\
+\concept{Conditions:} random/indep + expected counts mostly $\ge5$ (all preferred).\\
+\concept{Residuals:} large $|O-E|/\sqrt E$ cells drive signal.\\
+\section{SIMPLE LINEAR REGRESSION}
+\concept{Model:} $Y_i=\beta_0+\beta_1 x_i+\varepsilon_i$, $\varepsilon_i\sim N(0,\sigma^2)$ (for inference).\\
+\important{$\hat y=b_0+b_1x$,\quad $b_1=r\frac{s_y}{s_x}$,\quad $b_0=\bar y-b_1\bar x$.}\\
+\concept{Slope interp:} expected change in mean $Y$ for +1 unit in $X$.\\
+\concept{Intercept interp:} mean $Y$ at $X=0$ (context may be nonsensical).\\
+\concept{Residual:} $e_i=y_i-\hat y_i$; SSE$=\sum e_i^2$; $s_e=\sqrt{SSE/(n-2)}$.\\
+\concept{$R^2$:} proportion of var in $Y$ explained by linear model on $X$.\\
+\category{Slope inference:} $t=\frac{b_1-0}{SE(b_1)}$, df $n-2$, CI $b_1\pm t^*SE(b_1)$.\\
+\process{Diagnostics:} residuals vs fitted (linearity, equal var), QQ plot (normality), influential points.\\
+\important{Correlation $\neq$ causation; confounding + lurking vars possible unless random assignment.}\\
+\section{COMMON Z/T CRITICALS}
+\begin{tabular}{@{}ll@{}}
+Conf & $z^*$ \\
+90\% & 1.645 \\
+95\% & 1.960 \\
+98\% & 2.326 \\
+99\% & 2.576 \\
+\end{tabular}\\
+\concept{t critical} depends on df; approaches $z^*$ as df $\uparrow$.\\
+\section{QUICK EXAM TIPS}
+\begin{itemize}
+\item Always state parameter w/ population + time context.
+\item Write assumptions before formula to earn method points.
+\item Keep direction of subtraction consistent ($g1-g2$ everywhere).
+\item Report estimate, SE, stat, p-value, conclusion in words.
+\item For tiny p-values: write $p<0.001$ (not $0$).
+\item For CI, interpret using population parameter language.
+\item Check units in slope and prediction statements.
+\item Avoid extrapolation beyond observed $x$ range.
+\end{itemize}
+\end{multicols}
+\end{document}
